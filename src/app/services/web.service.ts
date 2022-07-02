@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Starship } from '../interfaces/starship';
+import { GetRequest } from '../interfaces/getRequest';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebService {
-  private api = 'http https://swapi.dev/api';
+  private next: string = '';
+  private api = 'https://swapi.dev/api';
   constructor(private http: HttpClient) {}
 
   getAllStarships() {
     const path = `${this.api}/starships`;
-    return this.http.get<Starship[]>(path);
+    return this.http.get<GetRequest>(path);
+  }
+
+  setNextApi(url: string) {
+    this.next = url;
+  }
+
+  getNextStarships() {
+    const path = this.next;
+    return this.http.get<GetRequest>(path);
   }
 
   getStarship(id: string) {
@@ -24,13 +35,13 @@ export class WebService {
     return this.http.post<Starship[]>(path, task);
   }
 
-  updateTask(task: Starship) {
-    const path = `${this.api}/todos/${task.id}`;
-    return this.http.put<Starship[]>(path, task);
-  }
+  // updateTask(task: Starship) {
+  //   const path = `${this.api}/todos/${task.id}`;
+  //   return this.http.put<Starship[]>(path, task);
+  // }
 
-  deleteTask(id: Starship) {
-    const path = `${this.api}/todos/${id}`;
-    return this.http.delete(path);
-  }
+  // deleteTask(id: Starship) {
+  //   const path = `${this.api}/todos/${id}`;
+  //   return this.http.delete(path);
+  // }
 }
