@@ -1,1 +1,52 @@
-<p>info-page works!</p>
+<div class="container" class="text-white p-2">
+    <img class="w-100" src={{currentStarship.image}} alt="starship image">
+    <h1 >{{currentStarship.name}}</h1>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            Model: {{currentStarship.model}}
+        </div>
+        <div class="col-6">
+            Manufacturer: {{currentStarship.manufacturer}}
+        </div>
+    </div>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            Cost in credits: {{currentStarship.cost_in_credits}}
+        </div>
+        <div class="col-6">
+            Length: {{currentStarship.length}} m
+        </div>
+    </div>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            Max Atmosphering Speed: {{currentStarship.max_atmosphering_speed}}
+        </div>
+        <div class="col-6">
+            Crew: {{currentStarship.crew}} 
+        </div>
+    </div>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            Passengers: {{currentStarship.passengers}}
+        </div>
+        <div class="col-6">
+            Cargo Capacity: {{currentStarship.cargo_capacity}} 
+        </div>
+    </div>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            Consumables: {{currentStarship.consumables}}
+        </div>
+        <div class="col-6">
+            Hyperdrive Rating: {{currentStarship.hyperdrive_rating}} 
+        </div>
+    </div>
+    <div class="row mt-2 mb-2">
+        <div class="col-6">
+            MGLT: {{currentStarship.MGLT}}
+        </div>
+        <div class="col-6">
+            Starship Class: {{currentStarship.starship_class}} 
+        </div>
+    </div>
+</div>

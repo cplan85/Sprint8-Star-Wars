@@ -8,6 +8,7 @@ import { Starship } from '../interfaces/starship';
 })
 export class InfoPageComponent implements OnInit {
   currentStarship = {
+    image: `../assets/0.png`,
     name: 'CR90 corvette',
     model: 'CR90 corvette',
     manufacturer: 'Corellian Engineering Corporation',

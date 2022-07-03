@@ -1,6 +1,10 @@
 
-<a href="" class="link-secondary text-decoration-none">
+
   <div *ngFor="let starship of starships; let i = index">
+    <a
+    href="starships/info"
+    
+    class="link-secondary text-decoration-none">
       <div class="card w-100 mt-3" style="width: 18rem;">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
           <div class="card-body">
@@ -8,7 +12,8 @@
             <p class="card-text">{{starship.model}}</p>
           </div>
         </div>
+      </a>
   </div>
-</a>
+
 
 <button type="button" (click)="getNextStarShips()" class="btn btn-outline-secondary">Get Next Ships</button>

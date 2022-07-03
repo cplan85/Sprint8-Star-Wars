@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { Starship } from '../interfaces/starship';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-starships',
@@ -8,7 +9,7 @@ import { Starship } from '../interfaces/starship';
   styleUrls: ['./starships.component.scss'],
 })
 export class StarshipsComponent implements OnInit {
-  constructor(private webService: WebService) {}
+  constructor(private webService: WebService, private router: Router) {}
 
   starships: Starship[] = [];
 
@@ -33,6 +34,26 @@ export class StarshipsComponent implements OnInit {
       this.webService.setNextApi(resultObject.next);
     });
   }
+
+  goToInfoPage(index: number) {
+    this.router.navigate(['/starships/info'], {
+      queryParams: {
+        id: index,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  // goPaginasWeb() {
+  //   this.budgetService.sendPageChangeEvent();
+  //   this.router.navigate(['/home'], {
+  //     queryParams: {
+  //       numberoPaginas: this.budgetService.webpages,
+  //       numeroIdiomas: this.budgetService.idiomas,
+  //     },
+  //     queryParamsHandling: 'merge',
+  //   });
+  // }
 
   ngOnInit(): void {
     this.getAllStarShips();
