@@ -7,6 +7,7 @@ import { GetRequest } from '../interfaces/getRequest';
   providedIn: 'root',
 })
 export class WebService {
+  starships: Starship[] = [];
   private next: string = '';
   private api = 'https://swapi.dev/api';
   constructor(private http: HttpClient) {}
@@ -14,6 +15,10 @@ export class WebService {
   getAllStarships() {
     const path = `${this.api}/starships`;
     return this.http.get<GetRequest>(path);
+  }
+
+  setStarShips(starships: Starship[]) {
+    this.starships = starships;
   }
 
   setNextApi(url: string) {

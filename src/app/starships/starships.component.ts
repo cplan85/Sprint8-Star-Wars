@@ -19,35 +19,36 @@ export class StarshipsComponent implements OnInit {
   starships: Starship[] = [];
 
   getAllStarShips() {
-    this.webService.getAllStarships().subscribe((resultObject) => {
-      console.log(resultObject.results[0]);
-
-      resultObject.results.forEach((starship, i) => {
-        this.starships.push({
-          image: `../assets/${i}.png`,
-          name: starship.name,
-          model: starship.model,
-          manufacturer: starship.manufacturer,
-          cost_in_credits: starship.cost_in_credits,
-          length: starship.length,
-          max_atmosphering_speed: starship.max_atmosphering_speed,
-          crew: starship.crew,
-          passengers: starship.passengers,
-          cargo_capacity: starship.cargo_capacity,
-          consumables: starship.consumables,
-          hyperdrive_rating: starship.hyperdrive_rating,
-          MGLT: starship.MGLT,
-          starship_class: starship.starship_class,
-          pilots: starship.pilots,
-          films: starship.films,
-          created: starship.created,
-          edited: starship.edited,
-          url: starship.url,
+    if (this.webService.starships.length === 0) {
+      this.webService.getAllStarships().subscribe((resultObject) => {
+        resultObject.results.forEach((starship, i) => {
+          this.starships.push({
+            image: `../assets/${i}.png`,
+            name: starship.name,
+            model: starship.model,
+            manufacturer: starship.manufacturer,
+            cost_in_credits: starship.cost_in_credits,
+            length: starship.length,
+            max_atmosphering_speed: starship.max_atmosphering_speed,
+            crew: starship.crew,
+            passengers: starship.passengers,
+            cargo_capacity: starship.cargo_capacity,
+            consumables: starship.consumables,
+            hyperdrive_rating: starship.hyperdrive_rating,
+            MGLT: starship.MGLT,
+            starship_class: starship.starship_class,
+            pilots: starship.pilots,
+            films: starship.films,
+            created: starship.created,
+            edited: starship.edited,
+            url: starship.url,
+          });
         });
-      });
 
-      this.webService.setNextApi(resultObject.next);
-    });
+        this.webService.setNextApi(resultObject.next);
+      });
+      this.webService.setStarShips(this.starships);
+    }
   }
 
   getNextStarShips() {
