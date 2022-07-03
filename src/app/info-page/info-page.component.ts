@@ -1,3 +1,4 @@
+import { CurrentStarshipService } from './../services/current-starship.service';
 import { Component, OnInit } from '@angular/core';
 import { Starship } from '../interfaces/starship';
 
@@ -7,17 +8,17 @@ import { Starship } from '../interfaces/starship';
   styleUrls: ['./info-page.component.scss'],
 })
 export class InfoPageComponent implements OnInit {
-  currentStarship = {
+  currentStarship: Starship = {
     image: `../assets/0.png`,
     name: 'CR90 corvette',
     model: 'CR90 corvette',
     manufacturer: 'Corellian Engineering Corporation',
-    cost_in_credits: '3500000',
+    cost_in_credits: 3500000,
     length: '150',
     max_atmosphering_speed: '950',
     crew: '30-165',
-    passengers: '600',
-    cargo_capacity: '3000000',
+    passengers: 600,
+    cargo_capacity: 3000000,
     consumables: '1 year',
     hyperdrive_rating: '2.0',
     MGLT: '60',
@@ -33,7 +34,9 @@ export class InfoPageComponent implements OnInit {
     url: 'https://swapi.dev/api/starships/2/',
   };
 
-  constructor() {}
+  constructor(private currentStarshipService: CurrentStarshipService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentStarship = this.currentStarshipService.currentStarship;
+  }
 }

@@ -1,4 +1,5 @@
 export interface Starship {
+  image?: string;
   name: string;
   model: string;
   manufacturer?: string;
@@ -10,4 +11,11 @@ export interface Starship {
   cargo_capacity?: number;
   consumables?: string;
   hyperdrive_rating?: string;
+  MGLT?: string;
+  starship_class?: string;
+  pilots?: string[];
+  films?: string[];
+  created?: string;
+  edited?: string;
+  url?: string;
 }
