@@ -14,7 +14,7 @@ export class StarshipsComponent implements OnInit {
 
   getAllStarShips() {
     this.webService.getAllStarships().subscribe((resultObject) => {
-      console.log(resultObject);
+      console.log(resultObject.results[0]);
 
       resultObject.results.forEach((starship) => {
         this.starships.push({ name: starship.name, model: starship.model });
