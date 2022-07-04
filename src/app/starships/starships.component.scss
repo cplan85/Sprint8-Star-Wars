@@ -27,6 +27,7 @@ height: 200px;
     .card-title:hover {
         color:#edec51 !important;
         cursor: pointer;
+        transition: color 1s;
     }
     
     .image-box {
@@ -39,3 +40,18 @@ height: 200px;
         height: 200px;
         cursor: pointer;
     }
+
+    /*
+    .background-gradient {
+        background: rgb(46,46,41);
+        background: radial-gradient(circle, rgba(46,46,41,0.7) 0%, rgba(40,39,39,1) 43%);
+        position: absolute;
+        z-index:0;
+        right: 25%;
+        top: 35%;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    */

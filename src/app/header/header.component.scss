@@ -22,20 +22,72 @@
 .horizontal-bar {
     position: absolute;
     display: inline-block;
-width: 33%;
+width: 20%;
 border-top: 1px solid #fff;
 box-shadow: 0 0 6px 2px;
 top: 80%;
-left: 30%;
+left: 37%;
 color: #edec51;
+transition: color 2s;
 }
 
 a {
     cursor: pointer; 
 }
 
-.navbar-brand:hover {
-    color: red;
+.navbar-brand  {
+    font-size: 1rem;
 }
+.navbar-brand:hover {
+    color:#ffffff !important;
+    transition: color 2s;
+}
+
+
+.active{
+    color:#ffffff !important;
+}
+
+.active-bar{
+    display: block;
+}
+
+.hidden-bar{
+    display:none;
+}
+
+.modal-title {
+    color: #edd700;
+    letter-spacing: 0.06em;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.x-button {
+    position: absolute;
+    right:0;
+    top:0;
+    font-size:2rem;
+}
+
+.x-button:hover {
+    color:white;
+}
+
+.modal-content {
+    background-color: #181818;
+    max-width: 540px;
+}
+
+input:focus {
+    background: #343434;
+    border: 1px solid #edd700;
+color: rgb(205, 149, 29);
+}
+
+
+
 
 

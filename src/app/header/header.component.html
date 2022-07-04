@@ -7,7 +7,9 @@
                 <img id="logo" class="mx-auto d-block" src="../assets/starwars-logo.png" alt="">
             </div>
             <div class="col-4 d-flex">
-                <a class="navbar-brand text-white ms-auto" href="#">LOG IN</a>
+                <a class="navbar-brand text-white ms-auto" href="#"
+                data-bs-toggle="modal" data-bs-target="#loginModal"
+                >LOG IN</a>
                 <a class="navbar-brand text-white" href="#">SIGN UP</a>
             </div>
         </div>
@@ -18,14 +20,25 @@
                     <div class="col-4"></div>
                     <div class="col-2 text-center nav-buttons p-2">
                         <a class="navbar-brand text-white-50"
-                        (click)="router.navigate(['/'])"
-                        >HOME</a>
+                        routerLinkActive="active"
+                        routerLink="/"
+                        [routerLinkActiveOptions]={exact:true}
+                        (click)="setHomeActive()"
+                        >HOME
+                        <span class="horizontal-bar"
+                        [ngClass]="homeActive ? 'active-bar' : 'hidden-bar'"
+                        ></span>
+                    </a>
                     </div>
                     <div class="col-2 text-center nav-buttons p-2">
-                        <a class="navbar-brand text-white-50" (click)="router.navigate(['starships/'])" 
-                      
+                        <a class="navbar-brand text-white-50" 
+                        (click)="setStarShipActive()" 
+                        routerLinkActive="active"
+                        routerLink="/starships/"
                         >STARSHIPS
-                        <span class="horizontal-bar"></span>
+                        <span class="horizontal-bar"
+                        [ngClass]="starShipActive ? 'active-bar' : 'hidden-bar'"
+                        ></span>
                     </a>
                     </div>
                     <div class="col-4"></div>
@@ -34,3 +47,24 @@
         </div>
       </div>
   </nav>
+
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content text-white-50 p-3">
+        <div class="modal-header d-flex flex-column">
+            <img class="w-75 img-fluid" src="../../assets/login-label.png" alt="">
+          <h5 class="modal-title text-center" id="exampleModalLabel">ENTER YOUR EMAIL ADDRESS</h5>
+          <button type="button" class="btn-close x-button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <input 
+        type="email" 
+        class="form-control my-4" 
+        id="exampleInputEmail1" 
+        aria-describedby="emailHelp"
+        placeholder="Email address"
+        >
+          <button type="button" class="btn btn-primary w-100">Continue</button>
+        
+      </div>
+    </div>
+  </div>

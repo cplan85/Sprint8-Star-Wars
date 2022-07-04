@@ -36,18 +36,15 @@ export class InfoPageComponent implements OnInit {
     url: 'https://swapi.dev/api/starships/2/',
   };
 
-  constructor(private webService: WebService, 
-    private route: ActivatedRoute) {}
+  constructor(private webService: WebService, private route: ActivatedRoute) {}
 
   //have to create component
   ngOnInit(): void {
-    this.route.queryParams
-    .subscribe(params => {
-      console.log(params); 
-   
-    }
-  );
-  //if webService.starships.length === 0 do this
-    this.currentStarship = this.webService.starships[this.webService.currentIndex];
+    this.route.queryParams.subscribe((params) => {
+      console.log(params);
+    });
+    //if webService.starships.length === 0 do this
+    this.currentStarship =
+      this.webService.starships[this.webService.currentIndex];
   }
 }
