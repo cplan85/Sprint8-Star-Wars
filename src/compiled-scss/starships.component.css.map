@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../app/starships/starships.component.scss"
+    ],
+    "names": [],
+    "file": "starships.component.css"
+}

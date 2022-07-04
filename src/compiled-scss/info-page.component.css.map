@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../app/info-page/info-page.component.scss"
+    ],
+    "names": [],
+    "file": "info-page.component.css"
+}
