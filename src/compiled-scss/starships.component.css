@@ -29,6 +29,7 @@
 }
 
 .image-box {
+  background-color: rgba(237, 236, 81, 0.5);
   background-size: 65%;
   /* <------ */
   background-repeat: no-repeat;
@@ -37,6 +38,10 @@
   border-color: #edec51;
   height: 200px;
   cursor: pointer;
+}
+
+.image-box:hover {
+  background-color: rgba(237, 236, 81, 0.9);
 }
 
 /*

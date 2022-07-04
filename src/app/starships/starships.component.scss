@@ -31,6 +31,9 @@ height: 200px;
     }
     
     .image-box {
+     
+        //background: radial-gradient(circle, rgba(227,203,242,1) 0%, rgba(237,236,81,1) 100%);
+         background-color:rgba(237,236,81,.50);
         //background-image: url(../../assets/0.png);
         background-size:     65%;                      /* <------ */
         background-repeat:   no-repeat;
@@ -39,6 +42,10 @@ height: 200px;
         border-color: #edec51;
         height: 200px;
         cursor: pointer;
+    }
+
+    .image-box:hover {
+        background-color:rgba(237,236,81,.90);
     }
 
     /*
