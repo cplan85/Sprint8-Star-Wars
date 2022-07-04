@@ -10,9 +10,32 @@
 }
 
 .nav-buttons {
-    border-right: 1px solid #343434;  
+    border-right: 1px solid #343434;
+    position:relative; 
+    
 }
 
 .nav-buttons:nth-child(2) {
     border-left: 1px solid #343434;
 }
+
+.horizontal-bar {
+    position: absolute;
+    display: inline-block;
+width: 33%;
+border-top: 1px solid #fff;
+box-shadow: 0 0 6px 2px;
+top: 80%;
+left: 30%;
+color: #edec51;
+}
+
+a {
+    cursor: pointer; 
+}
+
+.navbar-brand:hover {
+    color: red;
+}
+
+

@@ -11,11 +11,18 @@ type = "ball-beat"
     <a (click)="navigateToStarship(i)"
     
     class="link-secondary text-decoration-none">
-      <div class="card w-100 mt-3" style="width: 18rem;">
+      <div class="card w-100 mt-3 bg-secondary" style="width: 18rem;">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
-          <div class="card-body">
-            <h5 class="card-title">{{starship.name}}</h5>
-            <p class="card-text">{{starship.model}}</p>
+          <div class="d-flex">
+            <div class="card-body w-50">
+              <h5 class="card-title text-white">{{starship.name}}</h5>
+              <p class="card-text text-white-50">{{starship.model}}</p>
+              <div class="decal"></div>
+            </div>
+            <div 
+            class="w-50 image-box"
+            [style.backgroundImage]="'url(../../assets/'+ i + '.png)'"
+            ></div>
           </div>
         </div>
       </a>
