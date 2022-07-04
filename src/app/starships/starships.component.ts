@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { Starship } from '../interfaces/starship';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-starships',
@@ -13,68 +14,59 @@ export class StarshipsComponent implements OnInit {
   constructor(
     private webService: WebService,
     private router: Router,
-    private currentStarshipService: CurrentStarshipService
+    private currentStarshipService: CurrentStarshipService,
+    private spinner: NgxSpinnerService
   ) {}
 
   starships: Starship[] = [];
 
+  pushStarShips(starship: Starship, url: string){
+    this.starships.push({
+      image: url,
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      cost_in_credits: starship.cost_in_credits,
+      length: starship.length,
+      max_atmosphering_speed: starship.max_atmosphering_speed,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargo_capacity: starship.cargo_capacity,
+      consumables: starship.consumables,
+      hyperdrive_rating: starship.hyperdrive_rating,
+      MGLT: starship.MGLT,
+      starship_class: starship.starship_class,
+      pilots: starship.pilots,
+      films: starship.films,
+      created: starship.created,
+      edited: starship.edited,
+      url: starship.url,
+    });
+  }
   getAllStarShips() {
     if (this.webService.starships.length === 0) {
+      this.spinner.show();
       this.webService.getAllStarships().subscribe((resultObject) => {
+        this.spinner.hide();
         resultObject.results.forEach((starship, i) => {
-          this.starships.push({
-            image: `../assets/${i}.png`,
-            name: starship.name,
-            model: starship.model,
-            manufacturer: starship.manufacturer,
-            cost_in_credits: starship.cost_in_credits,
-            length: starship.length,
-            max_atmosphering_speed: starship.max_atmosphering_speed,
-            crew: starship.crew,
-            passengers: starship.passengers,
-            cargo_capacity: starship.cargo_capacity,
-            consumables: starship.consumables,
-            hyperdrive_rating: starship.hyperdrive_rating,
-            MGLT: starship.MGLT,
-            starship_class: starship.starship_class,
-            pilots: starship.pilots,
-            films: starship.films,
-            created: starship.created,
-            edited: starship.edited,
-            url: starship.url,
-          });
+          this.pushStarShips(starship, `../assets/${i}.png`);
         });
 
         this.webService.setNextApi(resultObject.next);
       });
       this.webService.setStarShips(this.starships);
+    } else {
+     this.starships = this.webService.starships
     }
   }
 
   getNextStarShips() {
+    //CREATE A COUNTER THAT STOPS AT 4 or 5 OTHERWISE SPINNER WILL SPIN FOREVER
+    this.spinner.show();
     this.webService.getNextStarships().subscribe((resultObject) => {
+      this.spinner.hide();
       resultObject.results.forEach((starship, i) => {
-        this.starships.push({
-          image: `../assets/${this.starships.length + i}.png`,
-          name: starship.name,
-          model: starship.model,
-          manufacturer: starship.manufacturer,
-          cost_in_credits: starship.cost_in_credits,
-          length: starship.length,
-          max_atmosphering_speed: starship.max_atmosphering_speed,
-          crew: starship.crew,
-          passengers: starship.passengers,
-          cargo_capacity: starship.cargo_capacity,
-          consumables: starship.consumables,
-          hyperdrive_rating: starship.hyperdrive_rating,
-          MGLT: starship.MGLT,
-          starship_class: starship.starship_class,
-          pilots: starship.pilots,
-          films: starship.films,
-          created: starship.created,
-          edited: starship.edited,
-          url: starship.url,
-        });
+        this.pushStarShips(starship, `../assets/${this.starships.length + i}.png`);
       });
 
       this.webService.setNextApi(resultObject.next);
@@ -98,18 +90,8 @@ export class StarshipsComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
+    this.webService.setCurrentIndex(index)
   }
-
-  // goPaginasWeb() {
-  //   this.budgetService.sendPageChangeEvent();
-  //   this.router.navigate(['/home'], {
-  //     queryParams: {
-  //       numberoPaginas: this.budgetService.webpages,
-  //       numeroIdiomas: this.budgetService.idiomas,
-  //     },
-  //     queryParamsHandling: 'merge',
-  //   });
-  // }
 
   ngOnInit(): void {
     this.getAllStarShips();

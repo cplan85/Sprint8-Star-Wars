@@ -1,6 +1,8 @@
-import { CurrentStarshipService } from './../services/current-starship.service';
+import { WebService } from './../services/web.service';
+//import { CurrentStarshipService } from './../services/current-starship.service';
 import { Component, OnInit } from '@angular/core';
 import { Starship } from '../interfaces/starship';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info-page',
@@ -34,9 +36,18 @@ export class InfoPageComponent implements OnInit {
     url: 'https://swapi.dev/api/starships/2/',
   };
 
-  constructor(private currentStarshipService: CurrentStarshipService) {}
+  constructor(private webService: WebService, 
+    private route: ActivatedRoute) {}
 
+  //have to create component
   ngOnInit(): void {
-    this.currentStarship = this.currentStarshipService.currentStarship;
+    this.route.queryParams
+    .subscribe(params => {
+      console.log(params); 
+   
+    }
+  );
+  //if webService.starships.length === 0 do this
+    this.currentStarship = this.webService.starships[this.webService.currentIndex];
   }
 }

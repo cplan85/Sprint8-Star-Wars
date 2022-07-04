@@ -1,6 +1,13 @@
 
-
-  <div class="mx-5" *ngFor="let starship of starships; let i = index">
+<ngx-spinner
+bdColor="rgba(0, 0, 0, 0.8)"
+size="medium"
+color = "#fff"
+type = "ball-beat"
+[fullScreen]="true"> <p style="color: white">Loading...</p>
+</ngx-spinner>
+ 
+ <div class="mx-5" *ngFor="let starship of starships; let i = index">
     <a (click)="navigateToStarship(i)"
     
     class="link-secondary text-decoration-none">
