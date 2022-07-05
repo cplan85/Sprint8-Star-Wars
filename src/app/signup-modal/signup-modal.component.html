@@ -6,15 +6,29 @@
           <h5 class="modal-title text-center" id="exampleModalLabel">CREATE YOUR ACCOUNT</h5>
           <button type="button" class="btn-close x-button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-       
+       <form [formGroup]="signupForm"
+        (ngSubmit)="send(signupForm.value)"
+        >
         <div class="my-2">
-            <input type="text" class="form-control is-invalid" id="validationServer01" placeholder="First Name" required>
+            <input 
+            type="text" 
+            class="form-control is-invalid" 
+            id="validationServer01" 
+            placeholder="First Name" 
+            formControlName="firstName"
+            required>
             <div class="invalid-feedback">
             Please enter your first name.
             </div>
         </div>
         <div class="my-2">
-        <input type="text" class="form-control is-invalid" id="validationServer01" placeholder="Last Name" required>
+        <input 
+        type="text" 
+        class="form-control is-invalid" 
+        id="validationServer01" 
+        placeholder="Last Name" 
+        formControlName="lastName"
+        required>
         <div class="invalid-feedback">
             Please enter your last name.
             </div>
@@ -26,31 +40,52 @@
             id="exampleInputEmail1" 
             aria-describedby="emailHelp"
             placeholder="Email address"
+            formControlName="email"
+            required
             >
             <div class="invalid-feedback">
                 Please enter your email address.
             </div>
         </div>
         <div class="my-2">
-            <input type="password" class="form-control is-invalid" id="validationServer01" placeholder="Password" required>
+            <input 
+            type="password" 
+            class="form-control is-invalid" 
+            id="validationServer01" 
+            placeholder="Password" 
+            formControlName="password"
+            required>
             <div class="invalid-feedback">
                 Please enter a password.
             </div>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input 
+            class="form-check-input" 
+            type="checkbox" 
+            value="" 
+            id="flexCheckDefault"
+            formControlName="showPassword"
+            >
             <label class="form-check-label checkbox-text" for="flexCheckDefault">
              Show Password
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <input 
+            class="form-check-input" 
+            type="checkbox" 
+            value="" 
+            id="flexCheckChecked" 
+            formControlName="getNewsletter"
+            >
             <label class="form-check-label checkbox-text mb-2" for="flexCheckChecked">
                 Yes! I would like to receive by email special offers and updates about Lucasfilm Ltd. and other products and services from <a href="" class="a-underline">The Walt Disney Family of Companies.</a>
             </label>
           </div>
           <p class="legal-text">By creating an account, you agree to our <a href="" class="a-underline">Terms of Use</a>, and acknowledge that you have read our Privacy Policy, Cookies Policy and UK & EU Privacy Rights. More...</p>
-          <button type="button" class="btn btn-primary w-100">Create Account</button>
+          <button type="submit" class="btn btn-primary w-100">Create Account</button>
+        </form>
          <p>already have an account? <a href=""
             data-bs-target="#loginModal"
             data-bs-toggle="modal"
