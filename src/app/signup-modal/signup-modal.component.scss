@@ -1,0 +1,43 @@
+.modal-title {
+    color: #edd700;
+    letter-spacing: 0.06em;
+}
+
+.a-underline {
+    color: #edd700;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.x-button {
+    position: absolute;
+    right:0;
+    top:0;
+    font-size:2rem;
+}
+
+.x-button:hover {
+    color:white;
+   // background-image: url(../../assets/close-btn.png);
+}
+
+.modal-content {
+    background-color: #181818;
+    max-width: 540px;
+}
+
+.form-control:focus {
+    background: #343434;
+    border: 1px solid #ffffff;
+color: rgb(205, 149, 29);
+}
+
+.checkbox-text {
+    font-size: .9rem;
+}
+
+.legal-text {
+    font-size: 14px;
+}

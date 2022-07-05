@@ -17,7 +17,7 @@ export class WebService {
 
   getAllStarships() {
     const path = `${this.api}/starships`;
-    return this.http.get<GetRequest>(path).pipe(delay(2000));
+    return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 
   setStarShips(starships: Starship[]) {
@@ -34,7 +34,7 @@ export class WebService {
 
   getNextStarships() {
     const path = this.next;
-    return this.http.get<GetRequest>(path).pipe(delay(2000));
+    return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 
   getStarship(id: string) {

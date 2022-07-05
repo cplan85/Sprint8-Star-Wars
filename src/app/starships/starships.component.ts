@@ -58,6 +58,7 @@ export class StarshipsComponent implements OnInit {
     } else {
      this.starships = this.webService.starships
     }
+    console.log(this.starships)
   }
 
   getNextStarShips() {
@@ -65,8 +66,9 @@ export class StarshipsComponent implements OnInit {
     this.spinner.show();
     this.webService.getNextStarships().subscribe((resultObject) => {
       this.spinner.hide();
+      const arrLength = this.starships.length
       resultObject.results.forEach((starship, i) => {
-        this.pushStarShips(starship, `../assets/${this.starships.length + i}.png`);
+        this.pushStarShips(starship, `../assets/${arrLength + i}.png`);
       });
 
       this.webService.setNextApi(resultObject.next);

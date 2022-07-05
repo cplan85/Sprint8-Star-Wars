@@ -11,8 +11,9 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SignupModalComponent } from './signup-modal/signup-modal.component';
 @NgModule({
-  declarations: [AppComponent, StarshipsComponent, HeaderComponent, InfoPageComponent, WelcomePageComponent],
+  declarations: [AppComponent, StarshipsComponent, HeaderComponent, InfoPageComponent, WelcomePageComponent, SignupModalComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, NgxSpinnerModule],
   providers: [],
   bootstrap: [AppComponent],
