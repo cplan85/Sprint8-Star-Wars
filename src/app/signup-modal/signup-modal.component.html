@@ -9,7 +9,7 @@
        <form [formGroup]="signupForm"
         (ngSubmit)="send(signupForm.value)"
         >
-        <div class="my-2">
+        <div class="my-3">
             <input 
             type="text" 
             class="form-control" 
@@ -19,7 +19,7 @@
             required>
             <small style="color:red" *ngIf="firstName && firstName.invalid && firstName.touched">Please enter a valid first name.</small>
         </div>
-        <div class="my-2">
+        <div class="my-3">
         <input 
         type="text" 
         class="form-control" 
@@ -29,7 +29,7 @@
         required>
         <small style="color:red" *ngIf="lastName && lastName.invalid && lastName.touched">Please enter a valid last name.</small>
         </div>
-        <div class="my-2">
+        <div class="my-3">
             <input 
             type="email" 
             class="form-control" 
@@ -43,9 +43,9 @@
             <small style="color:red" *ngIf="email && email.invalid && email.touched">Please enter a valid email address.</small>
            
         </div>
-        <div class="my-2">
+        <div class="my-3">
             <input 
-            type="password" 
+            [type]="changetype? 'password' : 'text'" 
             class="form-control" 
             id="validationServer01" 
             placeholder="Password" 
@@ -59,6 +59,7 @@
         <div class="form-check">
             <input 
             class="form-check-input" 
+            (click)="viewPassword()"
             type="checkbox" 
             value="" 
             id="flexCheckDefault"

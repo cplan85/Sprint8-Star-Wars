@@ -9,6 +9,14 @@ import { Validators } from '@angular/forms';
 })
 export class SignupModalComponent implements OnInit {
   signupForm: FormGroup;
+
+  visible: boolean = true;
+  changetype: boolean = true;
+
+  viewPassword() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
   constructor(private _builder: FormBuilder) {
     this.signupForm = this._builder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
