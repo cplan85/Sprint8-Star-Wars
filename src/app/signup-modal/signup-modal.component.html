@@ -12,45 +12,41 @@
         <div class="my-2">
             <input 
             type="text" 
-            class="form-control is-invalid" 
+            class="form-control" 
             id="validationServer01" 
             placeholder="First Name" 
             formControlName="firstName"
             required>
-            <div class="invalid-feedback">
-            Please enter your first name.
-            </div>
+            <small style="color:red" *ngIf="firstName && firstName.invalid && firstName.touched">Please enter a valid first name.</small>
         </div>
         <div class="my-2">
         <input 
         type="text" 
-        class="form-control is-invalid" 
+        class="form-control" 
         id="validationServer01" 
         placeholder="Last Name" 
         formControlName="lastName"
         required>
-        <div class="invalid-feedback">
-            Please enter your last name.
-            </div>
+        <small style="color:red" *ngIf="lastName && lastName.invalid && lastName.touched">Please enter a valid last name.</small>
         </div>
         <div class="my-2">
             <input 
             type="email" 
-            class="form-control is-invalid" 
-            id="exampleInputEmail1" 
+            class="form-control" 
+            id="InputEmail1" 
             aria-describedby="emailHelp"
             placeholder="Email address"
             formControlName="email"
+            value=""
             required
             >
-            <div class="invalid-feedback">
-                Please enter your email address.
-            </div>
+            <small style="color:red" *ngIf="email && email.invalid && email.touched">Please enter a valid email address.</small>
+           
         </div>
         <div class="my-2">
             <input 
             type="password" 
-            class="form-control is-invalid" 
+            class="form-control" 
             id="validationServer01" 
             placeholder="Password" 
             formControlName="password"
@@ -58,6 +54,7 @@
             <div class="invalid-feedback">
                 Please enter a password.
             </div>
+            <small style="color:red" *ngIf="password && password.invalid && password.touched">The password is too short</small>
         </div>
         <div class="form-check">
             <input 

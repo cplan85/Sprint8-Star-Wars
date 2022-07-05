@@ -41,3 +41,13 @@ color: rgb(205, 149, 29);
 .legal-text {
     font-size: 14px;
 }
+
+.form-control.ng-touched.ng-invalid {
+    border: 1px solid red;
+    color: red;
+    transition: border 2s;
+}
+
+.form-control.ng-touched.ng-valid {
+    border: 1px solid green;
+}
