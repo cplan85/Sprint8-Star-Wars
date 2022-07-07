@@ -11,7 +11,7 @@ import { User } from '../interfaces/user';
 })
 export class SignupModalComponent implements OnInit {
   signupForm: FormGroup;
-  localUsers: [] = [];
+  localComponentUsers: User[] = [];
 
   visible: boolean = true;
   changetype: boolean = true;
@@ -49,7 +49,14 @@ export class SignupModalComponent implements OnInit {
     return this.signupForm.get('password');
   }
 
+  deleteLocalStorage() {
+    this.localstorageservice.set('users', JSON.stringify([]));
+
+    console.log(this.localstorageservice.get('users'));
+  }
+
   send(values: any) {
+    const localStorage = this.localstorageservice.get('users');
     let firstName = this.signupForm.value['firstName'];
     let lastName = this.signupForm.value['lastName'];
 
@@ -64,9 +71,26 @@ export class SignupModalComponent implements OnInit {
     let getNewsletter = this.signupForm.value['getNewsletter'];
     console.log(getNewsletter);
 
+    console.log('My users', this.localstorageservice.get('users'));
     if (this.signupForm.valid) {
-      if (this.localstorageservice.get('users') === null) {
+      console.log(typeof localStorage, 'my length');
+      if (localStorage === null || JSON.stringify(localStorage).length === 0) {
+        this.localComponentUsers.push({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          getNewsletter: getNewsletter,
+        });
+        this.localstorageservice.set(
+          'users',
+          JSON.stringify(this.localComponentUsers)
+        );
       }
+      console.log(
+        'REAL LOCAL STORAGE USERS',
+        this.localstorageservice.get('users')
+      );
     }
     //this.budgetService.addBudgetItem(budgetName, customerName);
   }
