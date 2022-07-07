@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LocalStorageService } from '../local-storage.service';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-signup-modal',
@@ -10,6 +11,7 @@ import { LocalStorageService } from '../local-storage.service';
 })
 export class SignupModalComponent implements OnInit {
   signupForm: FormGroup;
+  localUsers: [] = [];
 
   visible: boolean = true;
   changetype: boolean = true;
@@ -63,7 +65,8 @@ export class SignupModalComponent implements OnInit {
     console.log(getNewsletter);
 
     if (this.signupForm.valid) {
-      //add this USER To localstorage
+      if (this.localstorageservice.get('users') === null) {
+      }
     }
     //this.budgetService.addBudgetItem(budgetName, customerName);
   }
