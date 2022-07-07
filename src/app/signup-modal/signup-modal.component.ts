@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-signup-modal',
@@ -17,7 +18,10 @@ export class SignupModalComponent implements OnInit {
     this.visible = !this.visible;
     this.changetype = !this.changetype;
   }
-  constructor(private _builder: FormBuilder) {
+  constructor(
+    private _builder: FormBuilder,
+    public localstorageservice: LocalStorageService
+  ) {
     this.signupForm = this._builder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
@@ -44,9 +48,6 @@ export class SignupModalComponent implements OnInit {
   }
 
   send(values: any) {
-    if (this.signupForm.valid) {
-      //add this USER To localstorage
-    }
     let firstName = this.signupForm.value['firstName'];
     let lastName = this.signupForm.value['lastName'];
 
@@ -61,6 +62,9 @@ export class SignupModalComponent implements OnInit {
     let getNewsletter = this.signupForm.value['getNewsletter'];
     console.log(getNewsletter);
 
+    if (this.signupForm.valid) {
+      //add this USER To localstorage
+    }
     //this.budgetService.addBudgetItem(budgetName, customerName);
   }
 }
