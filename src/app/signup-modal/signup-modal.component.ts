@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { LocalStorageService } from '../local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../interfaces/user';
 
 @Component({
@@ -50,8 +50,8 @@ export class SignupModalComponent implements OnInit {
   }
 
   deleteLocalStorage() {
-    this.localstorageservice.set('users', JSON.stringify([]));
-
+    this.localComponentUsers = [];
+    window.localStorage.removeItem('users');
     console.log(this.localstorageservice.get('users'));
   }
 
@@ -61,17 +61,17 @@ export class SignupModalComponent implements OnInit {
     let lastName = this.signupForm.value['lastName'];
 
     let email = this.signupForm.value['email'];
-    console.log(email);
 
     let password = this.signupForm.value['password'];
-    console.log(password);
 
     let showPassword = this.signupForm.value['showPassword'];
-    console.log(showPassword);
-    let getNewsletter = this.signupForm.value['getNewsletter'];
-    console.log(getNewsletter);
 
-    console.log('My users', this.localstorageservice.get('users'));
+    let getNewsletter = this.signupForm.value['getNewsletter'];
+
+    console.log(
+      'My users before validation',
+      this.localstorageservice.get('users')
+    );
     if (this.signupForm.valid) {
       console.log(typeof localStorage, 'my length');
       if (localStorage === null || JSON.stringify(localStorage).length === 0) {
