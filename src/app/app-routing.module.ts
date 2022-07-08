@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StarshipsComponent } from './starships/starships.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';

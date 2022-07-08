@@ -1,3 +1,4 @@
+import { UsersService } from './../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -22,7 +23,8 @@ export class SignupModalComponent implements OnInit {
   }
   constructor(
     private _builder: FormBuilder,
-    public localstorageservice: LocalStorageService
+    public localstorageservice: LocalStorageService,
+    public usersService: UsersService
   ) {
     this.signupForm = this._builder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
@@ -59,13 +61,8 @@ export class SignupModalComponent implements OnInit {
     const localStorage = this.localstorageservice.get('users');
     let firstName = this.signupForm.value['firstName'];
     let lastName = this.signupForm.value['lastName'];
-
     let email = this.signupForm.value['email'];
-
     let password = this.signupForm.value['password'];
-
-    let showPassword = this.signupForm.value['showPassword'];
-
     let getNewsletter = this.signupForm.value['getNewsletter'];
 
     console.log(
