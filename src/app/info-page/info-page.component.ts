@@ -36,6 +36,16 @@ export class InfoPageComponent implements OnInit {
     url: 'https://swapi.dev/api/starships/2/',
   };
 
+  pilots: any[] = [];
+
+  getPilots() {
+    this.currentStarship.pilots?.forEach((pilot) => {
+      this.webService.getPilot(pilot).subscribe((resultObject) => {
+        console.log(resultObject);
+        this.pilots.push(resultObject);
+      });
+    });
+  }
   constructor(private webService: WebService, private route: ActivatedRoute) {}
 
   //have to create component
@@ -46,5 +56,7 @@ export class InfoPageComponent implements OnInit {
     //if webService.starships.length === 0 do this
     this.currentStarship =
       this.webService.starships[this.webService.currentIndex];
+
+    this.getPilots();
   }
 }

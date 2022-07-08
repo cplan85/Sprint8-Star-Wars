@@ -49,4 +49,11 @@
             Starship Class: {{currentStarship.starship_class}} 
         </div>
     </div>
+   
+    <div>
+        <h4>Pilots</h4>
+        <div class="mx-5" *ngFor="let pilot of pilots; let i = index">
+            {{pilot.name}}
+        </div>
+    </div>
 </div>

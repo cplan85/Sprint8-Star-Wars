@@ -24,6 +24,10 @@ export class WebService {
     this.starships = starships;
   }
 
+  getPilot(path: string) {
+    return this.http.get<GetRequest>(path).pipe(delay(1000));
+  }
+
   setNextApi(url: string) {
     this.next = url;
   }
@@ -46,14 +50,4 @@ export class WebService {
     const path = `${this.api}/todos/`;
     return this.http.post<Starship[]>(path, task);
   }
-
-  // updateTask(task: Starship) {
-  //   const path = `${this.api}/todos/${task.id}`;
-  //   return this.http.put<Starship[]>(path, task);
-  // }
-
-  // deleteTask(id: Starship) {
-  //   const path = `${this.api}/todos/${id}`;
-  //   return this.http.delete(path);
-  // }
 }

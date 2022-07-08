@@ -12,6 +12,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupModalComponent } from './signup-modal/signup-modal.component';
+import { ModalModule } from 'ngb-modal';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
@@ -31,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

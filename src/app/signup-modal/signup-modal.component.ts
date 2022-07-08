@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../interfaces/user';
+import { Router } from '@angular/router';
+import { ModalManager } from 'ngb-modal';
 
 @Component({
   selector: 'app-signup-modal',
@@ -24,7 +26,9 @@ export class SignupModalComponent implements OnInit {
   constructor(
     private _builder: FormBuilder,
     public localstorageservice: LocalStorageService,
-    public usersService: UsersService
+    public usersService: UsersService,
+    private router: Router,
+    private modalService: ModalManager
   ) {
     this.signupForm = this._builder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
@@ -34,6 +38,11 @@ export class SignupModalComponent implements OnInit {
       showPassword: [false],
       getNewsletter: [false],
     });
+  }
+
+  closeModal() {
+    this.modalService.close('#signupModal');
+    //or this.modalRef.close();
   }
 
   ngOnInit(): void {}
@@ -66,11 +75,10 @@ export class SignupModalComponent implements OnInit {
     let getNewsletter = this.signupForm.value['getNewsletter'];
 
     console.log(
-      'My users before validation',
+      'Users BEFORE validation',
       this.localstorageservice.get('users')
     );
     if (this.signupForm.valid) {
-      console.log(typeof localStorage, 'my length');
       if (localStorage === null || JSON.stringify(localStorage).length === 0) {
         this.localComponentUsers.push({
           firstName: firstName,
@@ -83,6 +91,8 @@ export class SignupModalComponent implements OnInit {
           'users',
           JSON.stringify(this.localComponentUsers)
         );
+        this.usersService.logIn();
+        this.router.navigateByUrl('/starships');
       }
       console.log(
         'REAL LOCAL STORAGE USERS',
