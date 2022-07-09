@@ -15,6 +15,7 @@ import { SignupModalComponent } from './signup-modal/signup-modal.component';
 import { ModalModule } from 'ngb-modal';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PilotCardComponent } from './pilot-card/pilot-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfoPageComponent,
     WelcomePageComponent,
     SignupModalComponent,
+    PilotCardComponent,
   ],
   imports: [
     BrowserModule,
