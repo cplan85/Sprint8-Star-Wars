@@ -19,8 +19,9 @@ export class StarshipsComponent implements OnInit {
   ) {}
 
   starships: Starship[] = [];
+  starshipUrls: any[] = [];
 
-  pushStarShips(starship: Starship, url: string){
+  pushStarShips(starship: Starship, url: string) {
     this.starships.push({
       image: url,
       name: starship.name,
@@ -51,14 +52,13 @@ export class StarshipsComponent implements OnInit {
         resultObject.results.forEach((starship, i) => {
           this.pushStarShips(starship, `../assets/${i}.png`);
         });
-
         this.webService.setNextApi(resultObject.next);
       });
       this.webService.setStarShips(this.starships);
     } else {
-     this.starships = this.webService.starships
+      this.starships = this.webService.starships;
     }
-    console.log(this.starships)
+    console.log(this.starships);
   }
 
   getNextStarShips() {
@@ -66,11 +66,12 @@ export class StarshipsComponent implements OnInit {
     this.spinner.show();
     this.webService.getNextStarships().subscribe((resultObject) => {
       this.spinner.hide();
-      const arrLength = this.starships.length
+      const arrLength = this.starships.length;
       resultObject.results.forEach((starship, i) => {
         this.pushStarShips(starship, `../assets/${arrLength + i}.png`);
+        this.starshipUrls.push({ id: arrLength + i, url: starship.url });
       });
-
+      console.log(this.starshipUrls, 'URLS');
       this.webService.setNextApi(resultObject.next);
     });
   }
@@ -92,7 +93,7 @@ export class StarshipsComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
-    this.webService.setCurrentIndex(index)
+    this.webService.setCurrentIndex(index);
   }
 
   ngOnInit(): void {

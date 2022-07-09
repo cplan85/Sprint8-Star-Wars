@@ -3,6 +3,7 @@ import { WebService } from './../services/web.service';
 import { Component, OnInit } from '@angular/core';
 import { Starship } from '../interfaces/starship';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-info-page',
@@ -37,23 +38,82 @@ export class InfoPageComponent implements OnInit {
   };
 
   pilots: any[] = [];
+  urlId: number = 0;
+
+  starshipUrls: any[] = [
+    { id: 0, url: 'https://swapi.dev/api/starships/2/' },
+    { id: 1, url: 'https://swapi.dev/api/starships/3/' },
+    { id: 2, url: 'https://swapi.dev/api/starships/5/' },
+    { id: 3, url: 'https://swapi.dev/api/starships/9/' },
+    { id: 4, url: 'https://swapi.dev/api/starships/10/' },
+    { id: 5, url: 'https://swapi.dev/api/starships/11/' },
+    { id: 6, url: 'https://swapi.dev/api/starships/12/' },
+    { id: 7, url: 'https://swapi.dev/api/starships/13/' },
+    { id: 8, url: 'https://swapi.dev/api/starships/15/' },
+    { id: 9, url: 'https://swapi.dev/api/starships/17/' },
+    { id: 10, url: 'https://swapi.dev/api/starships/21/' },
+    { id: 11, url: 'https://swapi.dev/api/starships/22/' },
+    { id: 12, url: 'https://swapi.dev/api/starships/23/' },
+    { id: 13, url: 'https://swapi.dev/api/starships/27/' },
+    { id: 14, url: 'https://swapi.dev/api/starships/28/' },
+    { id: 15, url: 'https://swapi.dev/api/starships/29/' },
+    { id: 16, url: 'https://swapi.dev/api/starships/31/' },
+    { id: 17, url: 'https://swapi.dev/api/starships/32/' },
+    { id: 18, url: 'https://swapi.dev/api/starships/39/' },
+    { id: 19, url: 'https://swapi.dev/api/starships/40/' },
+    { id: 20, url: 'https://swapi.dev/api/starships/41/' },
+    { id: 21, url: 'https://swapi.dev/api/starships/43/' },
+    { id: 22, url: 'https://swapi.dev/api/starships/47/' },
+    { id: 23, url: 'https://swapi.dev/api/starships/48/' },
+    { id: 24, url: 'https://swapi.dev/api/starships/49/' },
+    { id: 25, url: 'https://swapi.dev/api/starships/52/' },
+    { id: 26, url: 'https://swapi.dev/api/starships/58/' },
+    { id: 27, url: 'https://swapi.dev/api/starships/59/' },
+    { id: 28, url: 'https://swapi.dev/api/starships/61/' },
+    { id: 29, url: 'https://swapi.dev/api/starships/63/' },
+    { id: 30, url: 'https://swapi.dev/api/starships/64/' },
+    { id: 31, url: 'https://swapi.dev/api/starships/65/' },
+    { id: 32, url: 'https://swapi.dev/api/starships/66/' },
+    { id: 33, url: 'https://swapi.dev/api/starships/68/' },
+    { id: 34, url: 'https://swapi.dev/api/starships/74/' },
+    { id: 35, url: 'https://swapi.dev/api/starships/75/' },
+  ];
 
   getPilots() {
     this.currentStarship.pilots?.forEach((pilot) => {
+      this.spinner.show();
       this.webService.getPilot(pilot).subscribe((resultObject) => {
         console.log(resultObject);
+        this.spinner.hide();
         this.pilots.push(resultObject);
       });
     });
   }
-  constructor(private webService: WebService, private route: ActivatedRoute) {}
+  constructor(
+    private webService: WebService,
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
+  ) {}
 
   //have to create component
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      console.log(params);
+      //console.log(parseInt(params['id']), 'my params');
+      this.urlId = parseInt(params['id']);
     });
-    //if webService.starships.length === 0 do this
+    if (this.webService.starships.length === 0) {
+      const starshipUrl = this.starshipUrls.find(
+        (x) => x.id === this.urlId
+      ).url;
+      this.webService.getStarship(starshipUrl).subscribe((resultObject) => {
+        console.log(resultObject.results);
+
+        // this.currentStarship = {
+        //   image: `../assets/${this.urlId}.png`,
+
+        // };
+      });
+    }
     this.currentStarship =
       this.webService.starships[this.webService.currentIndex];
 

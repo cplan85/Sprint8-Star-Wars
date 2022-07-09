@@ -20,6 +20,10 @@ export class WebService {
     return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 
+  getStarship(fullUrl: string) {
+    return this.http.get<GetRequest>(fullUrl).pipe(delay(1000));
+  }
+
   setStarShips(starships: Starship[]) {
     this.starships = starships;
   }
@@ -41,10 +45,10 @@ export class WebService {
     return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 
-  getStarship(id: string) {
-    const path = `${this.api}/starships/${id}`;
-    return this.http.get<Starship[]>(path);
-  }
+  // getStarship(id: string) {
+  //   const path = `${this.api}/starships/${id}`;
+  //   return this.http.get<Starship[]>(path);
+  // }
 
   createTask(task: Starship) {
     const path = `${this.api}/todos/`;
