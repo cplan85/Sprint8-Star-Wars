@@ -1,8 +1,12 @@
 <div class="card bg-secondary my-3 w-100" style="width: 18rem;">
-    <img src="../../assets/placeholder-img.jpg" class="card-img-top" alt="...">
+    <img 
+    [src]="'../../assets/characters/' + pilot.name + '.jpg' || backupUrl"
+
+    onerror="this.onerror=null;this.src='../../assets/placeholder-img.jpg';"
+    class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{pilot.name}}</h5>
-      <p class="card-text">{{pilot.name}} was born on {{pilot.birth_year}}.</p>
+      <p class="card-text">Born on {{pilot.birth_year}}.</p>
       <p>Height: {{pilot.height}}</p>
       <p>Mass: {{pilot.mass}}</p>
       <p>Gender: {{pilot.gender}}</p>

@@ -1,3 +1,15 @@
 .card {
     min-height: 400px;
 }
+
+.card-img-top {
+    border-bottom: solid 1px;
+    border-color: #9e4f60;
+}
+
+.card-body {
+    background-image: url(../../assets/bg-hash.png);
+background-size: 10px;
+background-repeat: repeat-x;
+background-position: top left;
+}

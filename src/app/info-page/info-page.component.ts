@@ -106,12 +106,27 @@ export class InfoPageComponent implements OnInit {
         (x) => x.id === this.urlId
       ).url;
       this.webService.getStarship(starshipUrl).subscribe((resultObject) => {
-        console.log(resultObject.results);
-
-        // this.currentStarship = {
-        //   image: `../assets/${this.urlId}.png`,
-
-        // };
+        this.currentStarship = {
+          image: `../assets/${this.urlId}.png`,
+          name: resultObject.name,
+          model: resultObject.model,
+          manufacturer: resultObject.manufacturer,
+          cost_in_credits: resultObject.cost_in_credits,
+          length: resultObject.length,
+          max_atmosphering_speed: resultObject.max_atmosphering_speed,
+          crew: resultObject.crew,
+          passengers: resultObject.passengers,
+          cargo_capacity: resultObject.cargo_capacity,
+          consumables: resultObject.consumables,
+          hyperdrive_rating: resultObject.hyperdrive_rating,
+          MGLT: resultObject.MGLT,
+          starship_class: resultObject.starship_class,
+          pilots: resultObject.pilots,
+          films: resultObject.films,
+          created: resultObject.created,
+          edited: resultObject.edited,
+          url: resultObject.url,
+        };
       });
     }
     this.currentStarship =

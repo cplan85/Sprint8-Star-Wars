@@ -17,6 +17,8 @@ export class PilotCardComponent implements OnInit {
     gender: '',
     eye_color: '',
   };
+  imgUrl = `../../assets/characters/${this.pilot.name}.jpg`;
+  backupUrl = `../../assets/placeholder-img.jpg`;
 
   constructor() {}
 

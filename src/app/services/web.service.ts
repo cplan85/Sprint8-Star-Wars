@@ -21,7 +21,7 @@ export class WebService {
   }
 
   getStarship(fullUrl: string) {
-    return this.http.get<GetRequest>(fullUrl).pipe(delay(1000));
+    return this.http.get<Starship>(fullUrl).pipe(delay(1000));
   }
 
   setStarShips(starships: Starship[]) {
