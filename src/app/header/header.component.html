@@ -51,26 +51,5 @@
         </div>
       </div>
   </nav>
-
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content text-white-50 p-5">
-        <div class="modal-header d-flex flex-column">
-            <img class="w-75 img-fluid" src="../../assets/login-label.png" alt="">
-          <h5 class="modal-title text-center" id="exampleModalLabel">ENTER YOUR EMAIL ADDRESS</h5>
-          <button type="button" class="btn-close x-button" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <input 
-        type="email" 
-        class="form-control my-4" 
-        id="exampleInputEmail1" 
-        aria-describedby="emailHelp"
-        placeholder="Email address"
-        >
-          <button type="button" class="btn btn-primary w-100">Continue</button>
-        
-      </div>
-    </div>
-  </div>
-
+  <app-signin-modal></app-signin-modal>
   <app-signup-modal></app-signup-modal>
