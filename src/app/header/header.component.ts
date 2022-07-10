@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ export class HeaderComponent implements OnInit {
   currentURL = window.location.href;
   starShipActive: boolean = false;
   homeActive: boolean = false;
+
   constructor(public router: Router) {}
 
   setStarShipActive() {

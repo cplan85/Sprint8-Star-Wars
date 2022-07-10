@@ -17,6 +17,9 @@ import { ModalModule } from 'ngb-modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PilotCardComponent } from './pilot-card/pilot-card.component';
 import { SigninModalComponent } from './signin-modal/signin-modal.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,7 @@ import { SigninModalComponent } from './signin-modal/signin-modal.component';
     FormsModule,
     ReactiveFormsModule,
     ModalModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
