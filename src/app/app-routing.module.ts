@@ -6,8 +6,16 @@ import { InfoPageComponent } from './info-page/info-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
-  { path: 'starships', component: StarshipsComponent },
-  { path: 'starships/info', component: InfoPageComponent },
+  {
+    path: 'starships',
+    component: StarshipsComponent,
+    data: { animation: 'isRight' },
+  },
+  {
+    path: 'starships/info',
+    component: InfoPageComponent,
+    data: { animation: 'isLeft' },
+  },
 ];
 
 @NgModule({
