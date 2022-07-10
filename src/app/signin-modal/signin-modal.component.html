@@ -19,8 +19,12 @@
         required
         >
         <small style="color:red" *ngIf="email && email.invalid && email.touched">Please enter a valid email address.</small>
-          <button type="button" class="btn btn-primary w-100">Continue</button>
-          <button class="btn btn-danger" (click)="triggerModal(modalData2)">Open Modal</button>
+          <button type="submit" class="btn btn-primary w-100" 
+          (click)="triggerModal(modalData2)">Continue</button>
+
+          <button id="closeModalButton" [hidden]="true" data-toggle="modal"        
+   class="btn btn-default"                          
+   data-bs-dismiss="modal">Close</button>
         </form>
       </div>
     </div>

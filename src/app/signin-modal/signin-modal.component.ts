@@ -3,6 +3,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-signin-modal',
@@ -12,6 +13,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class SigninModalComponent implements OnInit {
   signinForm: FormGroup;
   closeModal: string = '';
+  localstorageUsers: User[] = [];
   constructor(
     private localStorageService: LocalStorageService,
     private _builder: FormBuilder,
@@ -48,7 +50,9 @@ export class SigninModalComponent implements OnInit {
   ngOnInit(): void {
     let users = this.localStorageService.get('users');
 
-    console.log(users, 'users from sign-in');
+    console.log(JSON.parse(users!), 'users from sign-in');
+
+    this.localstorageUsers = JSON.parse(users!);
   }
 
   get email() {
@@ -57,5 +61,17 @@ export class SigninModalComponent implements OnInit {
 
   send(value: any) {
     let email = this.signinForm.value['email'];
+    const emailMatch = this.localstorageUsers.find((x) => x.email === email);
+
+    const closeButton = document.getElementById('closeModalButton');
+
+    const newModal = document.getElementById('modelData2');
+    if (closeButton != null) {
+      closeButton.click();
+    }
+
+    //this.triggerModal(newModal);
+
+    console.log(emailMatch, 'email from send');
   }
 }
