@@ -14,6 +14,7 @@ export class SigninModalComponent implements OnInit {
   signinForm: FormGroup;
   closeModal: string = '';
   localstorageUsers: User[] = [];
+  message: string = "";
   constructor(
     private localStorageService: LocalStorageService,
     private _builder: FormBuilder,
@@ -61,7 +62,14 @@ export class SigninModalComponent implements OnInit {
 
   send(value: any) {
     let email = this.signinForm.value['email'];
-    const emailMatch = this.localstorageUsers.find((x) => x.email === email);
+    if (this.signinForm.valid && this.localstorageUsers.length > 0) {
+
+      const emailMatch = this.localstorageUsers.find((user) => user.email === email);
+      if(emailMatch != null) {
+        this.message =  `Welcome back ${emailMatch.firstName} ${emailMatch.lastName}.`
+      }
+    }
+   
 
     const closeButton = document.getElementById('closeModalButton');
 
@@ -72,6 +80,6 @@ export class SigninModalComponent implements OnInit {
 
     //this.triggerModal(newModal);
 
-    console.log(emailMatch, 'email from send');
+    //console.log(emailMatch, 'email from send');
   }
 }

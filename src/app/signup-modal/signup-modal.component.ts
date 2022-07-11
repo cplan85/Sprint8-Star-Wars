@@ -15,6 +15,7 @@ import { ModalManager } from 'ngb-modal';
 export class SignupModalComponent implements OnInit {
   signupForm: FormGroup;
   localComponentUsers: User[] = [];
+  message: string = "";
 
   visible: boolean = true;
   changetype: boolean = true;
@@ -25,7 +26,7 @@ export class SignupModalComponent implements OnInit {
   }
   constructor(
     private _builder: FormBuilder,
-    public localstorageservice: LocalStorageService,
+    public localStorageService: LocalStorageService,
     public usersService: UsersService,
     private router: Router,
     private modalService: ModalManager
@@ -63,42 +64,64 @@ export class SignupModalComponent implements OnInit {
   deleteLocalStorage() {
     this.localComponentUsers = [];
     window.localStorage.removeItem('users');
-    console.log(this.localstorageservice.get('users'));
+    console.log(this.localStorageService.get('users'));
   }
 
+  addNewUser(firstName: string, lastName: string, email: string, password: string, getNewsletter: boolean) {
+    this.localComponentUsers.push({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      getNewsletter: getNewsletter,
+    });
+    this.localStorageService.set(
+      'users',
+      JSON.stringify(this.localComponentUsers)
+    );
+    this.usersService.logIn();
+    const closeButton = document.getElementById('closeModalButtonSignUp');
+    if (closeButton != null) {
+      closeButton.click();
+    }
+    this.router.navigateByUrl('/starships');
+  }
   send(values: any) {
-    const localStorage = this.localstorageservice.get('users');
+    const localStorage = this.localStorageService.get('users');
     let firstName = this.signupForm.value['firstName'];
     let lastName = this.signupForm.value['lastName'];
     let email = this.signupForm.value['email'];
     let password = this.signupForm.value['password'];
     let getNewsletter = this.signupForm.value['getNewsletter'];
 
+    const users = this.localStorageService.get('users');
+    let localstorageUsers: User[] = JSON.parse(users!);
+
     console.log(
       'Users BEFORE validation',
-      this.localstorageservice.get('users')
+      this.localStorageService.get('users')
     );
+    //console.log("email match", emailMatch)
     if (this.signupForm.valid) {
       if (localStorage === null || JSON.stringify(localStorage).length === 0) {
-        this.localComponentUsers.push({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          getNewsletter: getNewsletter,
-        });
-        this.localstorageservice.set(
-          'users',
-          JSON.stringify(this.localComponentUsers)
-        );
-        this.usersService.logIn();
-        this.router.navigateByUrl('/starships');
+        this.addNewUser(firstName, lastName, email, password, getNewsletter)
       }
+      else if(localstorageUsers.length > 0) {
+        
+        const emailMatch = localstorageUsers.find((user) => user.email === email);
+        if (emailMatch !=null) {
+          this.message = "user already exists."
+        } else {
+          console.log("I can add new users")
+          this.addNewUser(firstName, lastName, email, password, getNewsletter)
+        }
+        
+      }
+       
       console.log(
         'REAL LOCAL STORAGE USERS',
-        this.localstorageservice.get('users')
+        this.localStorageService.get('users')
       );
     }
-    //this.budgetService.addBudgetItem(budgetName, customerName);
   }
 }

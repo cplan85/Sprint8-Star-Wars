@@ -91,6 +91,10 @@
             >sign in</a></p>
 
             <button (click)="deleteLocalStorage()" id="submitAndClose">DELETE LOCAL STORAGE </button>
+            <small>{{message}}</small>
+            <button id="closeModalButtonSignUp" [hidden]="true" data-toggle="modal"        
+            class="btn btn-default"                          
+            data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
