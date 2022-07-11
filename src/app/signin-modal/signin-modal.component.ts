@@ -17,13 +17,13 @@ export class SigninModalComponent implements OnInit {
   signinForm: FormGroup;
   closeModal: string = '';
   localstorageUsers: User[] = [];
-  message: string = "";
+  message: string = '';
   constructor(
     private localStorageService: LocalStorageService,
     private _builder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
-    private usersService: UsersService
+    public usersService: UsersService
   ) {
     this.signinForm = this._builder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -59,6 +59,22 @@ export class SigninModalComponent implements OnInit {
     console.log(JSON.parse(users!), 'users from sign-in');
 
     this.localstorageUsers = JSON.parse(users!);
+
+    // const openModal = document.getElementById('open-modal');
+    // openModal?.click();
+  }
+
+  login() {
+    this.usersService.logIn().subscribe((res) => {
+      if (this.usersService.isLoggedIn) {
+        const redirect = this.usersService.redirectUrl
+          ? this.router.parseUrl(this.usersService.redirectUrl)
+          : 'login';
+        this.message = 'status: logged in';
+
+        this.router.navigateByUrl(redirect);
+      }
+    });
   }
 
   get email() {
@@ -69,28 +85,28 @@ export class SigninModalComponent implements OnInit {
     let email = this.signinForm.value['email'];
     const closeButton = document.getElementById('closeModalButton');
     if (this.signinForm.valid && this.localstorageUsers.length > 0) {
-      const emailMatch = this.localstorageUsers.find((user) => user.email === email);
-      if(emailMatch != null) {
+      const emailMatch = this.localstorageUsers.find(
+        (user) => user.email === email
+      );
+      if (emailMatch != null) {
         //this should then lead to next modal for login with just password. jsmith@gmail.com
-        this.message =  `Welcome back ${emailMatch.firstName} ${emailMatch.lastName}.`
+        this.message = `Welcome back ${emailMatch.firstName} ${emailMatch.lastName}.`;
         this.usersService.logIn();
-       // let dothis = setTimeout(function(){ 
-          if (closeButton != null) {
-            closeButton.click();
-           
-            email="";
-          }
-        // }, 1000)
-         this.router.navigateByUrl('/starships');
+        // let dothis = setTimeout(function(){
+        if (closeButton != null) {
+          closeButton.click();
 
-       //  clearInterval(dothis);
-        
-        console.log("triggered");
+          email = '';
+        }
+        // }, 1000)
+        this.router.navigateByUrl('/starships');
+
+        //  clearInterval(dothis);
+
+        console.log('triggered');
       }
     }
-    
 
     const newModal = document.getElementById('modelData2');
-  
   }
 }

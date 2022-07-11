@@ -1,3 +1,7 @@
+<a id="open-modal" href="#" [hidden]="true"
+                data-bs-toggle="modal" data-bs-target="#loginModal"
+                >LOG IN</a>
+
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content text-white-50 p-5">
@@ -27,6 +31,11 @@
           <button id="closeModalButton" [hidden]="true" data-toggle="modal"        
    class="btn btn-default"                          
    data-bs-dismiss="modal">Close</button>
+   <button   
+   class="btn btn-primary"                          
+   data-bs-dismiss="modal"
+   (click)="usersService.logOut"
+   >signOut</button>
         </form>
       </div>
     </div>
