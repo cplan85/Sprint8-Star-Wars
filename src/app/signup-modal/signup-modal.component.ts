@@ -29,7 +29,6 @@ export class SignupModalComponent implements OnInit {
     public localStorageService: LocalStorageService,
     public usersService: UsersService,
     private router: Router,
-    private modalService: ModalManager
   ) {
     this.signupForm = this._builder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+$')]],
@@ -127,10 +126,6 @@ export class SignupModalComponent implements OnInit {
         
       }
        
-      console.log(
-        'REAL LOCAL STORAGE USERS',
-        this.localStorageService.get('users')
-      );
     }
   }
 }
