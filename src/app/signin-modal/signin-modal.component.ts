@@ -17,11 +17,11 @@ export class SigninModalComponent implements OnInit {
   closeModal: string = '';
   localstorageUsers: User[] = [];
   currentUser: User = {
-    firstName: "",
-    email: "",
-    lastName: "",
-    password: "",
-    getNewsletter: false, 
+    firstName: '',
+    email: '',
+    lastName: '',
+    password: '',
+    getNewsletter: false,
   };
 
   message: string = '';
@@ -49,7 +49,7 @@ export class SigninModalComponent implements OnInit {
 
   login() {
     this.usersService.logIn().subscribe((res) => {
-      console.log("response from login", res)
+      console.log('response from login', res);
       if (this.usersService.isLoggedIn) {
         const redirect = this.usersService.redirectUrl
           ? this.router.parseUrl(this.usersService.redirectUrl)
@@ -63,14 +63,13 @@ export class SigninModalComponent implements OnInit {
 
   logout() {
     this.usersService.logOut().subscribe((res) => {
-    
       if (!this.usersService.isLoggedIn) {
         const redirect = this.usersService.redirectUrl
-          ? this.router.parseUrl("/")
+          ? this.router.parseUrl('/')
           : 'logout';
         this.message = 'status: logged out';
 
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl('/');
       }
     });
   }
@@ -90,23 +89,22 @@ export class SigninModalComponent implements OnInit {
       if (emailMatch != null) {
         //this should then lead to next modal for login with just password. jsmith@gmail.com
         this.message = `Welcome back ${emailMatch.firstName} ${emailMatch.lastName}.`;
-        //this.login();
         this.signinForm.reset();
         this.usersService.setCurrentUser(emailMatch);
         this.currentUser = emailMatch;
-        console.log("currentUser", this.usersService.currentUser)
-         const openModal = document.getElementById('open-modal');
-     openModal?.click();
-       
+        console.log('currentUser', this.usersService.currentUser);
+        const openModal = document.getElementById('open-modal');
+        openModal?.click();
+
         if (closeButton != null) {
           closeButton.click();
 
           email = '';
         }
         this.router.navigateByUrl('/starships');
-
+      } else {
+        this.message = 'No user matching that email found.';
       }
     }
-
   }
 }
