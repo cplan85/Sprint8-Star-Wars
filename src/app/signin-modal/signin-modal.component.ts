@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
 import { UsersService } from '../services/users.service';
 
 @Component({
@@ -21,36 +20,12 @@ export class SigninModalComponent implements OnInit {
   constructor(
     private localStorageService: LocalStorageService,
     private _builder: FormBuilder,
-    private modalService: NgbModal,
     private router: Router,
     public usersService: UsersService
   ) {
     this.signinForm = this._builder.group({
       email: ['', [Validators.required, Validators.email]],
     });
-  }
-
-  triggerModal(content: any) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (res) => {
-          this.closeModal = `Closed with: ${res}`;
-        },
-        (res) => {
-          this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   ngOnInit(): void {
@@ -66,6 +41,7 @@ export class SigninModalComponent implements OnInit {
 
   login() {
     this.usersService.logIn().subscribe((res) => {
+      console.log("response from login", res)
       if (this.usersService.isLoggedIn) {
         const redirect = this.usersService.redirectUrl
           ? this.router.parseUrl(this.usersService.redirectUrl)
@@ -77,6 +53,20 @@ export class SigninModalComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.usersService.logOut().subscribe((res) => {
+    
+      if (!this.usersService.isLoggedIn) {
+        const redirect = this.usersService.redirectUrl
+          ? this.router.parseUrl("/")
+          : 'logout';
+        this.message = 'status: logged out';
+
+        this.router.navigateByUrl("/");
+      }
+    });
+  }
+
   get email() {
     return this.signinForm.get('email');
   }
@@ -84,6 +74,7 @@ export class SigninModalComponent implements OnInit {
   send(value: any) {
     let email = this.signinForm.value['email'];
     const closeButton = document.getElementById('closeModalButton');
+    const passwordModalButton = document.getElementById('passwordModalButton');
     if (this.signinForm.valid && this.localstorageUsers.length > 0) {
       const emailMatch = this.localstorageUsers.find(
         (user) => user.email === email
@@ -91,22 +82,21 @@ export class SigninModalComponent implements OnInit {
       if (emailMatch != null) {
         //this should then lead to next modal for login with just password. jsmith@gmail.com
         this.message = `Welcome back ${emailMatch.firstName} ${emailMatch.lastName}.`;
-        this.usersService.logIn();
-        // let dothis = setTimeout(function(){
+        //this.login();
+        this.signinForm.reset();
+        this.usersService.setCurrentUser(emailMatch);
+         const openModal = document.getElementById('open-modal');
+     openModal?.click();
+       
         if (closeButton != null) {
           closeButton.click();
 
           email = '';
         }
-        // }, 1000)
         this.router.navigateByUrl('/starships');
 
-        //  clearInterval(dothis);
-
-        console.log('triggered');
       }
     }
 
-    const newModal = document.getElementById('modelData2');
   }
 }

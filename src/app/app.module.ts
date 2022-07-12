@@ -19,6 +19,7 @@ import { PilotCardComponent } from './pilot-card/pilot-card.component';
 import { SigninModalComponent } from './signin-modal/signin-modal.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SigninPasswordModalComponent } from './signin-password-modal/signin-password-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignupModalComponent,
     PilotCardComponent,
     SigninModalComponent,
+    SigninPasswordModalComponent,
   ],
   imports: [
     BrowserModule,

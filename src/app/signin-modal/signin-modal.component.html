@@ -1,5 +1,5 @@
 <a id="open-modal" href="#" [hidden]="true"
-                data-bs-toggle="modal" data-bs-target="#loginModal"
+                data-bs-toggle="modal" data-bs-target="#loginpasswordModal"
                 >LOG IN</a>
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -11,7 +11,7 @@
           <button type="button" class="btn-close x-button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form [formGroup]="signinForm"
-        (ngSubmit)="send(signinForm.value)"
+        (ngSubmit)="send(signinForm.value);"
         >
         <input 
         type="email" 
@@ -33,28 +33,11 @@
    data-bs-dismiss="modal">Close</button>
    <button   
    class="btn btn-primary"                          
-   data-bs-dismiss="modal"
-   (click)="usersService.logOut"
-   >signOut</button>
+   (click)="logout()"
+   >SIGN Out</button>
         </form>
       </div>
     </div>
   </div>
 
-  <ng-template #modalData2 let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Angular Bootstrap Modal Popup</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p><strong>Are you sure you want to delete <span class="text-primary">"Agatha Harkness"</span> profile?</strong></p>
-      
-      <p>All data related to west view profile will be removed permanently.
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
-    </div>
-  </ng-template>
+  <app-signin-password-modal></app-signin-password-modal>
