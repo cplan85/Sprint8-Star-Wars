@@ -2,9 +2,9 @@ import { UsersService } from './../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-signin-password-modal',
@@ -14,7 +14,15 @@ import { Router } from '@angular/router';
 export class SigninPasswordModalComponent implements OnInit {
   signinpasswordForm: FormGroup;
   localstorageUsers: User[] = [];
-  message: string = this.usersService.currentUser.email;
+  @Input() public currentUser: User = {
+    firstName: "",
+    email: "",
+    lastName: "",
+    password: "",
+    getNewsletter: false, 
+  };
+
+  message: string = this.currentUser.email;
   constructor(
     private _builder: FormBuilder,
     private router: Router,
@@ -26,7 +34,14 @@ export class SigninPasswordModalComponent implements OnInit {
    }
 
   ngOnInit(): void {
+   
+  }
+
+  modal = document.getElementById('loginpasswordModal');
   
+  
+  onOpen(event: any) {
+    console.log("event",event);
   }
 
   get password() {
@@ -49,22 +64,18 @@ export class SigninPasswordModalComponent implements OnInit {
 
   send(value: any) {
     let password = this.signinpasswordForm.value['password'];
-    const closeButton = document.getElementById('closeModalButton');
+    const closeButton = document.getElementById('closepasswordModalButton');
     const passwordModalButton = document.getElementById('passwordModalButton');
-    if (this.signinpasswordForm.valid && this.localstorageUsers.length > 0) {
-      const passwordMatch = this.localstorageUsers.find(
-        (user) => user.password === password
-      );
-      if (passwordMatch != null) {
-        //this should then lead to next modal for login with just password. jsmith@gmail.com
-        this.message = `Welcome back ${passwordMatch.firstName} ${passwordMatch.lastName}.`;
+    if (this.signinpasswordForm.valid) {
+    
+      
+      if (this.currentUser.password === password) {
+        
         this.login();
         this.signinpasswordForm.reset();
        
         if (closeButton != null) {
           closeButton.click();
-
-          password = '';
         }
         this.router.navigateByUrl('/starships');
 

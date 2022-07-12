@@ -41,11 +41,6 @@ export class SignupModalComponent implements OnInit {
     });
   }
 
-  closeModal() {
-    this.modalService.close('#signupModal');
-    //or this.modalRef.close();
-  }
-
   ngOnInit(): void {}
 
   get firstName() {
@@ -65,6 +60,19 @@ export class SignupModalComponent implements OnInit {
     this.localComponentUsers = [];
     window.localStorage.removeItem('users');
     console.log(this.localStorageService.get('users'));
+  }
+
+  login() {
+    this.usersService.logIn().subscribe((res) => {
+      if (this.usersService.isLoggedIn) {
+        const redirect = this.usersService.redirectUrl
+          ? this.router.parseUrl(this.usersService.redirectUrl)
+          : 'login';
+        this.message = 'status: logged in';
+
+        this.router.navigateByUrl(redirect);
+      }
+    });
   }
 
   addNewUser(firstName: string, lastName: string, email: string, password: string, getNewsletter: boolean) {
@@ -105,6 +113,7 @@ export class SignupModalComponent implements OnInit {
     if (this.signupForm.valid) {
       if (localStorage === null || JSON.stringify(localStorage).length === 0) {
         this.addNewUser(firstName, lastName, email, password, getNewsletter)
+        this.login();
       }
       else if(localstorageUsers.length > 0) {
         
@@ -112,8 +121,8 @@ export class SignupModalComponent implements OnInit {
         if (emailMatch !=null) {
           this.message = "user already exists."
         } else {
-          console.log("I can add new users")
           this.addNewUser(firstName, lastName, email, password, getNewsletter)
+          this.login();
         }
         
       }

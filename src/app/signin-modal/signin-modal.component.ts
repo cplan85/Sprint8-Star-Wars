@@ -16,6 +16,14 @@ export class SigninModalComponent implements OnInit {
   signinForm: FormGroup;
   closeModal: string = '';
   localstorageUsers: User[] = [];
+  currentUser: User = {
+    firstName: "",
+    email: "",
+    lastName: "",
+    password: "",
+    getNewsletter: false, 
+  };
+
   message: string = '';
   constructor(
     private localStorageService: LocalStorageService,
@@ -85,6 +93,8 @@ export class SigninModalComponent implements OnInit {
         //this.login();
         this.signinForm.reset();
         this.usersService.setCurrentUser(emailMatch);
+        this.currentUser = emailMatch;
+        console.log("currentUser", this.usersService.currentUser)
          const openModal = document.getElementById('open-modal');
      openModal?.click();
        
