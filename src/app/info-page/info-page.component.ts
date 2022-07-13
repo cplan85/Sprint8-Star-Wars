@@ -98,7 +98,6 @@ export class InfoPageComponent implements OnInit {
   //have to create component
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      //console.log(parseInt(params['id']), 'my params');
       this.urlId = parseInt(params['id']);
     });
     if (this.webService.starships.length === 0) {

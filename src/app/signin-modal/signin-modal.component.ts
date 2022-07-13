@@ -6,7 +6,6 @@ import { Validators } from '@angular/forms';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-signin-modal',
@@ -30,8 +29,7 @@ export class SigninModalComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private _builder: FormBuilder,
     private router: Router,
-    public usersService: UsersService,
-    private route: ActivatedRoute,
+    public usersService: UsersService
   ) {
     this.signinForm = this._builder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -45,14 +43,11 @@ export class SigninModalComponent implements OnInit {
 
     this.localstorageUsers = JSON.parse(users!);
 
-    if(this.router.url ==="/login"){
+    if (this.router.url === '/login') {
       const openModal = document.getElementById('initiate-modal');
       openModal?.click();
-    } 
-
+    }
   }
-
- 
 
   login() {
     this.usersService.logIn().subscribe((res) => {

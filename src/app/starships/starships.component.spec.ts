@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { WebService } from '../services/web.service';
 
 import { StarshipsComponent } from './starships.component';
 
@@ -8,9 +10,25 @@ describe('StarshipsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StarshipsComponent ]
-    })
-    .compileComponents();
+      declarations: [StarshipsComponent],
+      providers: [
+        {
+          provide: WebService,
+          useValue: jasmine.createSpyObj('WebService', [
+            'getAllStarships',
+            'setNextApi',
+            'setStarShips',
+            'getNextStarships',
+            'setCurrentIndex',
+            'starships',
+          ]),
+        },
+        {
+          provide: Router,
+          useValue: jasmine.createSpyObj('Router', ['navigate']),
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +37,7 @@ describe('StarshipsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create Starships Component', () => {
     expect(component).toBeTruthy();
   });
 });
