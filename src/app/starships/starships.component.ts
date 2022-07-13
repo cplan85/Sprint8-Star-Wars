@@ -20,6 +20,7 @@ export class StarshipsComponent implements OnInit {
 
   starships: Starship[] = [];
   starshipUrls: any[] = [];
+  backupUrl = `../../assets/placeholder-img.jpg`;
 
   pushStarShips(starship: Starship, url: string) {
     this.starships.push({

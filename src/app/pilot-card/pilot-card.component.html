@@ -1,8 +1,8 @@
 <div class="card bg-secondary my-3 w-100" style="width: 18rem;">
     <img 
-    [src]="'../../assets/characters/' + pilot.name + '.jpg' || backupUrl"
+    [src]="'../../assets/characters/' + pilot.name + '.jpg'"
 
-    onerror="this.onerror=null;this.src='../../assets/placeholder-img.jpg';"
+    onerror="this.onerror=null;this.src='../../assets/placeholder-img.jpg'; console.log('missing pilots')"
     class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{pilot.name}}</h5>
