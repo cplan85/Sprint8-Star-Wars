@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'starships/info',
     component: InfoPageComponent,
+    canActivate: [AuthGuard],
     data: { animation: 'isLeft' },
   },
 ];
