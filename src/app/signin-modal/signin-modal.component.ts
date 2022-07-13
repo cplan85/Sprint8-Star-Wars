@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-//import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';

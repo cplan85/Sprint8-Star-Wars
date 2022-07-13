@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit {
   starShipActive: boolean = false;
   homeActive: boolean = false;
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,
+    public usersService: UsersService) {}
 
   setStarShipActive() {
     this.starShipActive = true;
@@ -22,6 +23,18 @@ export class HeaderComponent implements OnInit {
   setHomeActive() {
     this.starShipActive = false;
     this.homeActive = true;
+  }
+
+  logout() {
+    this.usersService.logOut().subscribe((res) => {
+      if (!this.usersService.isLoggedIn) {
+        const redirect = this.usersService.redirectUrl
+          ? this.router.parseUrl('/')
+          : 'logout';
+
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 
   ngOnInit(): void {
