@@ -34,8 +34,9 @@ height: 200px;
      
         //background: radial-gradient(circle, rgba(227,203,242,1) 0%, rgba(237,236,81,1) 100%);
          background-color:rgba(237,236,81,.50);
+         background: radial-gradient(circle, rgba(139,106,60,1) 0%, rgba(139,137,60,1) 43%);
         //background-image: url(../../assets/0.png);
-        background-size:     65%;                      /* <------ */
+        background-size:     100%;                      /* <------ */
         background-repeat:   no-repeat;
         background-position: center center; 
         border-left: solid 1px;
@@ -46,6 +47,13 @@ height: 200px;
 
     .image-box:hover {
         background-color:rgba(237,236,81,.90);
+        background: radial-gradient(circle, rgb(237,236,81) 0%, rgba(139,137,60,1) 63%);
+    }
+
+    .card-img {
+        height:100%;
+        object-fit: contain;
+        overflow: hidden;
     }
 
     /*
