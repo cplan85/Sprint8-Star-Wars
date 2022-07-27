@@ -1,22 +1,50 @@
 import { CurrentStarshipService } from './../services/current-starship.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { Starship } from '../interfaces/starship';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-starships',
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss'],
 })
-export class StarshipsComponent implements OnInit {
+export class StarshipsComponent implements OnInit, AfterViewInit {
+
+  @ViewChildren("theLastList", {read: ElementRef})
+  theLastList: QueryList<ElementRef>;
+  observer: any;
+
   constructor(
     private webService: WebService,
     private router: Router,
     private currentStarshipService: CurrentStarshipService,
     private spinner: NgxSpinnerService
   ) {}
+  
+  ngAfterViewInit(): void {
+    this.theLastList.changes.subscribe((d) => {
+      if (d.last) this.observer.observe(d.last.nativeElement)
+    })
+  }
+
+  intersectionObserver() {
+    let options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    }
+    
+    this.observer = new IntersectionObserver( (entries)=> {
+      if(entries[0].isIntersecting) {
+       // console.log("scroll more")
+       if(this.starships.length < 35) {
+        this.getNextStarShips()}
+      }
+    }, options);
+  }
 
   starships: Starship[] = [];
   starshipUrls: any[] = [];
@@ -63,7 +91,6 @@ export class StarshipsComponent implements OnInit {
   }
 
   getNextStarShips() {
-    //CREATE A COUNTER THAT STOPS AT 4 or 5 OTHERWISE SPINNER WILL SPIN FOREVER
     this.spinner.show();
     this.webService.getNextStarships().subscribe((resultObject) => {
       this.spinner.hide();
@@ -99,5 +126,6 @@ export class StarshipsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllStarShips();
+    this.intersectionObserver();
   }
 }

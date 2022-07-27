@@ -9,8 +9,9 @@ type = "ball-beat"
  
  <div class="mx-5" *ngFor="let starship of starships; let i = index">
     <a (click)="navigateToStarship(i)"
-    
-    class="link-secondary text-decoration-none">
+    *ngIf="i + 1 ===starships.length"
+    class="link-secondary text-decoration-none"
+    #theLastList>
       <div class="card w-100 mt-3 bg-secondary" style="width: 18rem;">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
           <div class="d-flex">
@@ -34,7 +35,30 @@ type = "ball-beat"
           </div>
         </div>
       </a>
+      <a (click)="navigateToStarship(i)"
+      *ngIf="i + 1 !=starships.length"
+      class="link-secondary text-decoration-none">
+        <div class="card w-100 mt-3 bg-secondary" style="width: 18rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="d-flex">
+              <div class="card-body w-50">
+                <h5 class="card-title text-white">{{starship.name}}</h5>
+                <p class="card-text text-white-50">{{starship.model}}</p>
+                <p class="text-white-50">{{i}}</p>
+                <div class="decal"></div>
+  
+              </div>
+              <div 
+              class="w-50 image-box"
+            
+              >
+              <img 
+              [src]="'../../assets/'+ i + '.png'"
+          
+              onerror="this.onerror=null;this.src='../../assets/placeholder.png';"
+              class="card-img cover-img img-fluid" alt="...">
+            </div>
+            </div>
+          </div>
+        </a>
   </div>
-
-
-<div class="mx-5 my-3"><button type="button" *ngIf="starships.length < 35;" (click)="getNextStarShips()" class="btn btn-outline-light w-100">Get Next Starships</button></div>
