@@ -2,6 +2,9 @@
 
 ![Design image](./src/assets/preview1.JPG)
 
+### [Deployed Link](https://cp-star-wars.netlify.app/)
+<br>
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7. The front-end framework also implements Bootstrap 5. This project is based off of a front end developer technical test of a large e-commerce sector company from Barcelona. The test involves consuming API data, displaying the data in a list, and cross referencing API calls with subsequent API calls within the Star Wars API.
 
 This site requires a login or registration where the user's information is stored in local storage. Once a user is logged in, they are able to view a list of starships with corresponding pictures. Upon clicking on a ship's card, more information is presented and an additional API call is made which loads pilots associated with each ship.
@@ -12,7 +15,7 @@ As an advanced feature to help complete this challenge, infinite scrolling is im
 ## ![preview gif](./src/assets/star-wars-preview.gif)
 
 ## :wrench: **Tech used in this project**
-Front-End: Angular with [Bootstrap5](https://getbootstrap.com/) is used for the front-end UI Components. Within Angular, this projected implemented use of Angular Router with authorization guards, Http Client Module to make API calls, Observables to handle infinite scrolling and help wit http client calls, and Router animations to handle various page transtions.
+Front-End: Angular with [Bootstrap5](https://getbootstrap.com/) is used for the front-end UI Components. Within Angular, this projected implemented use of Angular Router with authorization guards, Http Client Module to make API calls, Observables to handle infinite scrolling, and Router animations to handle various page transitions.
 
 ## Development server
 
