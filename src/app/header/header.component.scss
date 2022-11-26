@@ -2,11 +2,26 @@
     margin: auto;
 }
 
+.bar {
+    display: block;
+    width: 30px;
+    height: 2px;
+    margin: 8px;
+    border-right: 20px solid #999;
+    border-left: 4px solid #999;
+    box-sizing: border-box;
+    border-radius: 1px;
+}
+
 .main-nav {
     color: #aaa;
     border-top: 1px solid #343434;
     border-bottom: 1px solid #343434;
     box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+}
+
+.mobile-nav {
+    display: none;
 }
 
 .nav-buttons {
@@ -87,6 +102,16 @@ input:focus {
 color: rgb(205, 149, 29);
 }
 
+@media (max-width: 576px) {
+
+    .widescreen-nav {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+}
 
 
 
